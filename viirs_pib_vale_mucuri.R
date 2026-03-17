@@ -1,12 +1,12 @@
 # ================================================================
 # PROVA DE CONCEITO, PIB MENSAL MODELADO PARA OS 23 MUNICIPIOS
 # DO VALE DO MUCURI (MG) A PARTIR DE LUZES NOTURNAS VIIRS
-# VERSAO 2, COM FILTRO DE QUALIDADE, WINSORIZACAO E DIAGNOSTICOS
+# VERSAO COM FILTRO DE QUALIDADE, WINSORIZACAO E DIAGNOSTICOS
 # ================================================================
 # O que este script faz:
 # 1) baixa as geometrias dos 23 municipios do Vale do Mucuri;
 # 2) extrai estatisticas mensais de luminosidade VIIRS no Earth Engine;
-# 3) baixa o PIB municipal anual oficial do IBGE/SIDRA (2013-2023);
+# 3) baixa o PIB municipal anual oficial do IBGE/SIDRA (2012-2023);
 # 4) estima um modelo anual simples: log(PIB) ~ log(luz anual) + FE municipal + tendencia;
 # 5) construi uma proxy mensal benchmarked ao PIB anual oficial;
 # 6) aplica penalizacao por baixa cobertura e winsorizacao da luz mensal;
@@ -16,38 +16,33 @@
 # IMPORTANTE:
 # - O resultado principal nao e PIB mensal oficial. E uma proxy/modelagem mensal
 #   ancorada no PIB anual oficial do IBGE.
-# - A serie ancorada vai de 2013-01 a 2023-12.
+# - A serie ancorada vai de 2012-01 a 2023-12.
 # - O bloco Chow-Lin e opcional e pode ser usado como upgrade metodologico.
 #
 # PRE-REQUISITOS:
 # - Conta no Google Earth Engine (https://earthengine.google.com/)
 # - Projeto GEE criado e autenticado via rgee
 # - Python configurado com o ambiente rgee (ver documentacao do pacote rgee)
-# - Pacotes R listados na secao 2
 # ================================================================
 
 # =========================================================
 # 0) PARAMETROS GERAIS
 # =========================================================
 
-# Ajuste para o caminho do Python no seu ambiente rgee.
-# Exemplo Linux/Mac: "/home/usuario/miniconda3/envs/rgee/bin/python"
-# Exemplo Windows:   "C:/Users/usuario/miniconda3/envs/rgee/python.exe"
-# Para localizar o caminho correto, rode: reticulate::py_config()
 reticulate_python <- "caminho/para/seu/python/rgee"
 
 # Substitua pelo ID do seu projeto no Google Earth Engine.
 # O projeto e criado em https://console.cloud.google.com/
 ee_project <- "seu-projeto-gee"
 
-start_date <- "2013-01-01"
+start_date <- "2012-01-01"
 end_date_exclusive <- "2024-01-01"   # exclusivo, portanto vai ate 2023-12
-sidra_years <- 2013:2023
+sidra_years <- 2012:2023
 
 save_outputs <- TRUE
 run_chow_lin <- TRUE   # mude para TRUE quando quiser rodar a versao mensal econometrica
 
-# Lista dos 23 municipios da antiga mesorregiao Vale do Mucuri
+# Lista dos 23 municipios Vale do Mucuri
 mucuri_names <- c(
   "Ataleia", "Catuji", "Franciscopolis", "Frei Gaspar", "Itaipe",
   "Ladainha", "Malacacheta", "Novo Oriente de Minas", "Ouro Verde de Minas",
@@ -520,10 +515,10 @@ if (run_chow_lin) {
 # 15) SAIDAS
 # =========================================================
 if (save_outputs) {
-  readr::write_csv(lights_monthly,      "lights_monthly_vale_mucuri_2013_2023_clean.csv")
-  readr::write_csv(panel_annual,        "panel_annual_vale_mucuri_2013_2023.csv")
-  readr::write_csv(pib_monthly,         "pib_monthly_vale_mucuri_2013_2023_v2.csv")
-  readr::write_csv(check_benchmark,     "check_benchmark_vale_mucuri_2013_2023_v2.csv")
+  readr::write_csv(lights_monthly,      "lights_monthly_vale_mucuri_2012_2023_clean.csv")
+  readr::write_csv(panel_annual,        "panel_annual_vale_mucuri_2012_2023.csv")
+  readr::write_csv(pib_monthly,         "pib_monthly_vale_mucuri_2012_2023_v2.csv")
+  readr::write_csv(check_benchmark,     "check_benchmark_vale_mucuri_2012_2023_v2.csv")
   readr::write_csv(teofilo_outliers,    "diagnostico_teofilo_outliers.csv")
   readr::write_csv(teofilo_seasonality, "diagnostico_teofilo_sazonalidade.csv")
 
