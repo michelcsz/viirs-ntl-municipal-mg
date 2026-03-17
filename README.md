@@ -2,7 +2,7 @@
 
 Pipeline de prova de conceito para estimação de **proxies mensais de atividade econômica** para municípios brasileiros a partir de dados de **luzes noturnas VIIRS/Suomi NPP**, ancoradas no PIB municipal anual oficial do IBGE.
 
-Este repositório contém o script R desenvolvido e validado para os **23 municípios da mesorregião Vale do Mucuri (Minas Gerais)**, cobrindo o período de **2013 a 2023**.
+Este repositório contém o script R desenvolvido e validado para os **23 municípios da mesorregião Vale do Mucuri (Minas Gerais)**, cobrindo o período de **2012 a 2023**.
 
 ---
 
@@ -46,11 +46,11 @@ Arquivos de saída (gerados pelo script, não versionados):
 
 | Arquivo | Descrição |
 |---------|-----------|
-| `lights_monthly_vale_mucuri_2013_2023_clean.csv` | Painel mensal de NTL com indicadores de qualidade |
-| `panel_annual_vale_mucuri_2013_2023.csv` | Painel anual NTL + PIB com previsões do modelo |
-| `pib_monthly_vale_mucuri_2013_2023_v2.csv` | Proxy mensal de PIB (método proporcional) |
+| `lights_monthly_vale_mucuri_2012_2023_clean.csv` | Painel mensal de NTL com indicadores de qualidade |
+| `panel_annual_vale_mucuri_2012_2023.csv` | Painel anual NTL + PIB com previsões do modelo |
+| `pib_monthly_vale_mucuri_2012_2023_v2.csv` | Proxy mensal de PIB (método proporcional) |
 | `pib_monthly_vale_mucuri_chow_lin.csv` | Proxy mensal de PIB (método Chow-Lin) |
-| `check_benchmark_vale_mucuri_2013_2023_v2.csv` | Diagnósticos de reconciliação anual |
+| `check_benchmark_vale_mucuri_2012_2023_v2.csv` | Diagnósticos de reconciliação anual |
 | `check_benchmark_chow_lin.csv` | Diagnósticos de reconciliação Chow-Lin |
 | `diagnostico_teofilo_outliers.csv` | Diagnóstico de outliers para Teófilo Otoni |
 | `diagnostico_teofilo_sazonalidade.csv` | Diagnóstico de sazonalidade para Teófilo Otoni |
@@ -114,7 +114,7 @@ ensure_rgee_sessioninfo(email = "seu-email@gmail.com")
 | Fonte | Descrição | Acesso |
 |-------|-----------|--------|
 | NOAA/VIIRS/DNB/MONTHLY_V1/VCMCFG | Compostos mensais VIIRS Day/Night Band | Google Earth Engine |
-| IBGE/SIDRA — Tabela 5938 | PIB dos Municípios, 2013–2023 | API pública via `sidrar` |
+| IBGE/SIDRA — Tabela 5938 | PIB dos Municípios, 2012–2023 | API pública via `sidrar` |
 | IBGE — Malha municipal | Geometrias municipais, edição 2020 | Público via `geobr` |
 
 ---
